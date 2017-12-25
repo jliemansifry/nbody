@@ -52,26 +52,32 @@ def plotLines(saveFigs = -1):
     bg = plt.Circle((0, 0), radius=np.sqrt(2)*axlims, color='black', alpha=0.9)
     ax.add_artist(bg)
 
-
-    # Janky (non-general) for now; fix later.
+    # Start out by just pulling in the Sun.
     sun = pd.read_table('Star.txt', delim_whitespace=True)
-    earth = pd.read_table('Earth.txt', delim_whitespace=True)
-    jupiter = pd.read_table('Jupiter.txt', delim_whitespace=True)
+    # Set something up to store the planets later.
+    planets = []
+
+    fs = pd.read_table('filenames.log', delim_whitespace=True)
+    for i in range(len(fs.Name)):
+        # Don't read in the star
+        if fs.Name[i] != 'Star.txt':
+            planets.append(pd.read_table(fs.Name[i], delim_whitespace=True))
 
 
     plt.plot(sun.XS[0], sun.YS[0], '.r')
-
     i = 0
-    # It should be redundant to check both (each should have the same number of timesteps), but what the hell.
-    while i < len(earth.XS) and i < len(venus.XS):
-        plt.plot([earth.XS[i], jupiter.XS[i]], [earth.YS[i], jupiter.YS[i]], color='blue', alpha=0.3, linestyle='-')
-        i += 10
+    while i < len(planets[0].XS):
+        plt.plot([planets[0].XS[i], planets[1].XS[i]], [planets[0].YS[i], planets[1].YS[i]], color='cyan', alpha=0.07, linestyle='-')
+        i += 100
 
         if saveFigs == 1:
             plt.savefig(outname + str(i) + '.jpeg')
 
     if saveFigs == -1:
         plt.show(block=False)
+
+
+        
 
 
 def makePics(fnames, gifYN):
