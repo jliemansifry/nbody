@@ -303,7 +303,7 @@ class tree:
 
         # If this node is a leaf (i.e. no subs, just a nice little body), just do the grav
         if len(n.bodies) > 0:
-            b.aGrav(n.bodies[0])
+            b.update_gravitational_accel(n.bodies[0])
             return
 
         # There are no bodies, so it's either an empty leaf or an empty internal branch
@@ -337,7 +337,7 @@ class tree:
                     # s/d < theta, approximation works!
                     else:
                         # Add this acceleration contribution
-                        b.aGrav(body('BHapproximated', n.totalMass, 1, n.com, [0,0], 'black'))
+                        b.update_gravitational_accel(body('BHapproximated', n.totalMass, 1, n.com, [0, 0], 'black'))
                         return
 
 
@@ -409,7 +409,7 @@ class tree:
                 # Position update (and log the data)
                 b.acceleration = [0,0]
                 self.calculateGravBH(nOld, b)
-                b.positionAndVelocityUpdater(dt)
+                b.update_position_and_velocity(dt)
 
                 # Sort this body into the new graph
                 b.parent = self.root

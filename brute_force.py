@@ -89,9 +89,9 @@ class systemBF:
             #print "\nCurrently Brute-Force stepping ", i.name
             # Calculate the gravitaional acceleration due to all other bodies on i
             for ob in oldBods:
-                i.aGrav(ob)
+                i.update_gravitational_accel(ob)
             # Now update the positions and velocities.
-            i.positionAndVelocityUpdater(dt)
+            i.update_position_and_velocity(dt)
 
 
             # If a body is too far out of the FOV, just get rid of it.
