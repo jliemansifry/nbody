@@ -102,9 +102,14 @@ class tree:
 
 
         # If the body is trying to go outside the node's limits, just pass it (delete it)
-        if body.xs[-1] > n.xlims[1] or  body.xs[-1] < n.xlims[0] or body.ys[-1] > n.ylims[1] or  body.ys[-1] < n.ylims[0]:
+        latest_x = body.xs[-1]
+        latest_y = body.ys[-1]
+        latest_x_beyond_lim = latest_x > n.xlims[1] or latest_x < n.xlims[0]
+        latest_y_beyond_lim = latest_y > n.ylims[1] or latest_y < n.ylims[0]
+        if latest_x_beyond_lim or latest_y_beyond_lim:
             # Just return. If we've made it this far, then the body hasn't stuck anywhere above, so by not placing it in this one, it just disappears
             return
+
 
 
         # Want to add mass to every body as we go.
