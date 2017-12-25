@@ -1,4 +1,4 @@
-# Overview
+## Overview
 An n-body simulator with implementations for brute-force and Barnes-hut methods. Documentation is basically just the paper for this class (./projectWritings/draft.pdf). Run using the commands:
 
 ```python
@@ -6,7 +6,7 @@ bf.run_BruteForce(nTimesteps, nSmallBodies)
 bh.run_BarnesHut(nTimesteps, nSmallBodies)
 ```
 
-## Notes
+### Notes
 
 - Theta is set at 0 for now; change (to 0.5 by convention, or whatever else floats your boat) if you actually want to do anything.
 
@@ -21,7 +21,7 @@ bh.run_BarnesHut(nTimesteps, nSmallBodies)
 - Use twilio (imported below) to send myself a text when a run finishes.
     https://www.twilio.com/blog/2016/10/how-to-send-an-sms-with-python-using-twilio.html?utm_source=readthedocs&utm_medium=cpc&utm_campaign=python
 
-## Additional Resources
+### Additional Resources
 #### General N-Body Stuff:
 N-Body Simulations: http://physics.princeton.edu/~fpretori/Nbody/intro.htm
 
