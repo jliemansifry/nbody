@@ -52,7 +52,7 @@ elapsedTimeBH = []
 durationBH = []
 
 
-n = node('root', [-axlims, axlims], [-axlims, axlims], None)
+n = node('root', [-axlims, axlims], [-axlims, axlims], None)  # this is a scary global variable.
 bh = tree(n)
 bh.visualizeTree()
 bh.run_BarnesHut(30000, 0)
