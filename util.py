@@ -17,7 +17,7 @@ def calcTime(meth):
         nBodsLast = 1
         while nBods <= max_nBods:
             g = open(outname, 'a')
-            outs = bh.run_BarnesHut(nt, nBods)
+            outs = bh.run(nt, nBods)
             nBods = outs[0]
             dt = outs[1]
             g.write(str(nBods) + " " +  str(dt) + '\n')
@@ -33,7 +33,7 @@ def calcTime(meth):
         nBodsLast = 1
         while nBods < max_nBods:
             g = open(outname, 'a')
-            outs = bf.run_BruteForce(nt, nBods)
+            outs = bf.run(nt, nBods)
             nBods = outs[0]
             dt = outs[1]
             g.write(str(nBods) + " " +  str(dt) + '\n')

@@ -10,7 +10,7 @@ from run_nbody_sim import G, AU, mSol, bf, rSol, mEarth, rEarth, dt, \
 from body import body
 
 
-class systemBF:
+class BruteForceSystem:
     def __init__(self):
         #self.ax = plt.subplots()                            # not convinced this is necessary
         self.bodies = []                                    # list of bodies
@@ -103,7 +103,7 @@ class systemBF:
                 """
 
 
-    def run_BruteForce(self, nTimesteps, nSmallBods):
+    def run(self, nTimesteps, nSmallBods):
         # Start the timer:
         startBF = time.time()
         mStar = mSol

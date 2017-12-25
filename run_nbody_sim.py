@@ -15,8 +15,8 @@ import astropy.constants as c
 
 
 ### CONSTANTS ###
-from barnes_hut_gridding import node, tree
-from brute_force import systemBF
+from barnes_hut_gridding import node, BarnesHutSystem
+from brute_force import BruteForceSystem
 
 G = -c.G.value                                              # m3 kg-1 s-2
 AU = c.au.value                                             # m
@@ -53,11 +53,11 @@ durationBH = []
 
 
 n = node('root', [-axlims, axlims], [-axlims, axlims], None)
-bh = tree(n)
+bh = BarnesHutSystem(n)
 bh.visualizeTree()
-bh.run_BarnesHut(30000, 0)
+bh.run(30000, 0)
 
-bf = systemBF()
-bf.run_BruteForce(100, 0)
+bf = BruteForceSystem()
+bf.run(100, 0)
 
 # The End
