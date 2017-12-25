@@ -12,7 +12,6 @@ from body import body
 
 class systemBF:
     def __init__(self):
-        #self.ax = plt.subplots()                            # not convinced this is necessary
         self.bodies = []                                    # list of bodies
 
 
@@ -73,10 +72,6 @@ class systemBF:
                 mtot += i.mass
             comx = mxcomx/mtot
 
-            #ax.plot(t, self.bodies[0].xs[-1], '.y')
-            #ax.plot(t, self.bodies[0].ys[-1], '.r')
-            #ax.axvline(x=t)
-            #ax.plot(t, self.bodies[0].xs[-1] - comx, '.y')
             ax.plot(t, self.bodies[0].velocity[0], '.y')
             plt.show(block=False)
             plt.pause(0.0001)
