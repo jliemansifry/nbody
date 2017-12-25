@@ -88,16 +88,6 @@ class systemBF:
             # Now update the positions and velocities.
             i.positionAndVelocityUpdater(dt)
 
-
-            # If a body is too far out of the FOV, just get rid of it.
-            # Removing this for the time being just so no bodies get lost -> more accurate timing
-            """
-            if abs(np.sqrt( (i.xs[-1])**2 + (i.ys[-1])**2)) > 1.5*axlims:
-                self.removeBod(i)
-                print "removed", i.name, "for being too far away"
-                """
-
-
     def run_BruteForce(self, nTimesteps, nSmallBods):
         # Start the timer:
         startBF = time.time()
