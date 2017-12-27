@@ -102,9 +102,14 @@ class tree:
 
 
         # If the body is trying to go outside the node's limits, just pass it (delete it)
-        if body.xs[-1] > n.xlims[1] or  body.xs[-1] < n.xlims[0] or body.ys[-1] > n.ylims[1] or  body.ys[-1] < n.ylims[0]:
+        latest_x = body.xs[-1]
+        latest_y = body.ys[-1]
+        latest_x_beyond_lim = latest_x > n.xlims[1] or latest_x < n.xlims[0]
+        latest_y_beyond_lim = latest_y > n.ylims[1] or latest_y < n.ylims[0]
+        if latest_x_beyond_lim or latest_y_beyond_lim:
             # Just return. If we've made it this far, then the body hasn't stuck anywhere above, so by not placing it in this one, it just disappears
             return
+
 
 
         # Want to add mass to every body as we go.
@@ -303,7 +308,7 @@ class tree:
 
         # If this node is a leaf (i.e. no subs, just a nice little body), just do the grav
         if len(n.bodies) > 0:
-            b.aGrav(n.bodies[0])
+            b.update_gravitational_accel(n.bodies[0])
             return
 
         # There are no bodies, so it's either an empty leaf or an empty internal branch
@@ -337,7 +342,7 @@ class tree:
                     # s/d < theta, approximation works!
                     else:
                         # Add this acceleration contribution
-                        b.aGrav(body('BHapproximated', n.totalMass, 1, n.com, [0,0], 'black'))
+                        b.update_gravitational_accel(body('BHapproximated', n.totalMass, 1, n.com, [0, 0], 'black'))
                         return
 
 
@@ -409,7 +414,7 @@ class tree:
                 # Position update (and log the data)
                 b.acceleration = [0,0]
                 self.calculateGravBH(nOld, b)
-                b.positionAndVelocityUpdater(dt)
+                b.update_position_and_velocity(dt)
 
                 # Sort this body into the new graph
                 b.parent = self.root

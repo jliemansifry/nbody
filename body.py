@@ -23,7 +23,7 @@ class body:
         return False
 
 
-    def aGrav(self, otherBody):
+    def update_gravitational_accel(self, otherBody):
         # Calculate the gravitational acceleration on a body due to a different body
         # Zero this out elsewhere and add on.
         #self.acceleration = [0,0]
@@ -39,7 +39,7 @@ class body:
             self.acceleration[1] += yhat * G * otherBody.mass * d**-2
 
 
-    def positionAndVelocityUpdater(self, dt):
+    def update_position_and_velocity(self, dt):
 
         self.velocity[0] += self.acceleration[0] * dt           # x component
         self.velocity[1] += self.acceleration[1] * dt           # y component
