@@ -12,7 +12,6 @@ from body import body
 
 class systemBF:
     def __init__(self):
-        #self.ax = plt.subplots()                            # not convinced this is necessary
         self.bodies = []                                    # list of bodies
 
 
@@ -73,10 +72,6 @@ class systemBF:
                 mtot += i.mass
             comx = mxcomx/mtot
 
-            #ax.plot(t, self.bodies[0].xs[-1], '.y')
-            #ax.plot(t, self.bodies[0].ys[-1], '.r')
-            #ax.axvline(x=t)
-            #ax.plot(t, self.bodies[0].xs[-1] - comx, '.y')
             ax.plot(t, self.bodies[0].velocity[0], '.y')
             plt.show(block=False)
             plt.pause(0.0001)
@@ -93,35 +88,25 @@ class systemBF:
             # Now update the positions and velocities.
             i.positionAndVelocityUpdater(dt)
 
-
-            # If a body is too far out of the FOV, just get rid of it.
-            # Removing this for the time being just so no bodies get lost -> more accurate timing
-            """
-            if abs(np.sqrt( (i.xs[-1])**2 + (i.ys[-1])**2)) > 1.5*axlims:
-                self.removeBod(i)
-                print "removed", i.name, "for being too far away"
-                """
-
-
     def run_BruteForce(self, nTimesteps, nSmallBods):
         # Start the timer:
         startBF = time.time()
         mStar = mSol
         # exampleBody =  body(name, mass, radius, xy, velocity, color)
-        bf.addBod(body('Star', mStar, rSol, [0,0], [0,-0], 'y'))
-        #bf.addBod(body('Mercury', 0.055*mEarth, 0.3829*rEarth, [-0.4481*AU, 0], [0, -55410], 'blue'))
-        bf.addBod(body('Venus', 0.815*mEarth, 0.949*rEarth, [0.721*AU, 0], [0, 34910], 'orange'))
-        bf.addBod(body('Earth', mEarth, rEarth, [0, AU], [-29838, -0], 'g'))
-        #bf.addBod(body('Mars', 0.10745*mEarth, 0.531*rEarth, [0, -1.52*AU], [240740, 0], 'red'))
-        #bf.addBod(body('Jupiter', 317*mEarth, 11*rEarth, [5.2*AU, 0], [0, 13048], 'magenta'))
-        #bf.addBod(body('FastJupiter', 317*mEarth, 11*rEarth, [5.2*AU, 0], [0, 40000], 'magenta'))
-        #bf.addBod(body('Saturn', 95.16*mEarth, 9.14*rEarth, [0,10.06*AU], [-10180, 0], 'orange'))
-        #bf.addBod(body('Uranus', 14.53*mEarth, 3.976*rEarth, [-19.91*AU, 0], [0, -7058], 'blue'))
-        #bf.addBod(body('Neptune', 17.148*mEarth, 3.86*rEarth, [0, -29.95*AU], [5413, 0], 'cyan'))
+        bf.add_body_to_tree(body('Star', mStar, rSol, [0, 0], [0, -0], 'y'))
+        #bf.add_body_to_tree(body('Mercury', 0.055*mEarth, 0.3829*rEarth, [-0.4481*AU, 0], [0, -55410], 'blue'))
+        bf.add_body_to_tree(body('Venus', 0.815 * mEarth, 0.949 * rEarth, [0.721 * AU, 0], [0, 34910], 'orange'))
+        bf.add_body_to_tree(body('Earth', mEarth, rEarth, [0, AU], [-29838, -0], 'g'))
+        #bf.add_body_to_tree(body('Mars', 0.10745*mEarth, 0.531*rEarth, [0, -1.52*AU], [240740, 0], 'red'))
+        #bf.add_body_to_tree(body('Jupiter', 317*mEarth, 11*rEarth, [5.2*AU, 0], [0, 13048], 'magenta'))
+        #bf.add_body_to_tree(body('FastJupiter', 317*mEarth, 11*rEarth, [5.2*AU, 0], [0, 40000], 'magenta'))
+        #bf.add_body_to_tree(body('Saturn', 95.16*mEarth, 9.14*rEarth, [0,10.06*AU], [-10180, 0], 'orange'))
+        #bf.add_body_to_tree(body('Uranus', 14.53*mEarth, 3.976*rEarth, [-19.91*AU, 0], [0, -7058], 'blue'))
+        #bf.add_body_to_tree(body('Neptune', 17.148*mEarth, 3.86*rEarth, [0, -29.95*AU], [5413, 0], 'cyan'))
 
         # V2434 Ori
-        #bf.addBod(body('V2434a', 3.5*mSol, 3.5*rSol, [-220*AU, 0], [0, -np.sqrt((-G*6*mSol)/(220*AU))], 'blue'))
-        #bf.addBod(body('V2434b', 3.*mSol, 3*rSol, [220*AU, 0], [0, np.sqrt((-G*6*mSol)/(220*AU))], 'cyan'))
+        #bf.add_body_to_tree(body('V2434a', 3.5*mSol, 3.5*rSol, [-220*AU, 0], [0, -np.sqrt((-G*6*mSol)/(220*AU))], 'blue'))
+        #bf.add_body_to_tree(body('V2434b', 3.*mSol, 3*rSol, [220*AU, 0], [0, np.sqrt((-G*6*mSol)/(220*AU))], 'cyan'))
         #"""
         # Inner ring of small random bodies:
         if nSmallBods > 0:
@@ -148,7 +133,7 @@ class systemBF:
                 vx = -v * (y/abs(y)) * np.sin(x/y) + variance
                 vy = v * (x/abs(x)) * np.cos(x/y) + variance
 
-                bf.addBod(body('planetesimal_'+str(i), 0.05*mEarth, 0.02*rEarth, [x, y], [vx, vy], 'y'))
+                bf.add_body_to_tree(body('planetesimal_' + str(i), 0.05 * mEarth, 0.02 * rEarth, [x, y], [vx, vy], 'y'))
 
 
 

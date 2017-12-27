@@ -38,13 +38,6 @@ class tree:
     def __init__(self, initialNode):
         self.root = initialNode
 
-    def addBod(self, n, body):
-        # Give a body and a host node for that body
-        self.sortBody(n, body)
-        #self.traceback(n)
-
-
-
     def remove(self, body):
         # Remove a body from the structure by emptying its host node.
         # This should work since, after the sorting, no node should be holding more than one body.
@@ -84,7 +77,7 @@ class tree:
 
 
 
-    def sortBody(self, n, body):
+    def add_body_to_tree(self, n, body):
         # Sort a body into the tree
         # Add body's mass to the total mass of each node it passes through.
         # If the body is trying to go somewhere outside the node, just drop it.
@@ -132,21 +125,21 @@ class tree:
                 if nodeMidX <= body.xs[-1]:                     # if body is on the east side:
                     if nodeMidY <= body.ys[-1]:                 # if body is on the north side:
                         #print "NE", n.ne.level, "for ", body.name
-                        self.sortBody(n.ne, body)
+                        self.add_body_to_tree(n.ne, body)
                         #n.bodies.remove(b)
                     elif nodeMidY >= body.ys[-1]:               # it's on the south
                         #print "Nw", n.nw.level, " for ", body.name
-                        self.sortBody(n.se, body)
+                        self.add_body_to_tree(n.se, body)
                         #n.bodies.remove(b)
                 else:                                           # body is on the west side
                     if nodeMidY <= body.ys[-1]:                 # if body is on the north side:
                         #print "SW", n.sw.level, "for ", body.name
-                        self.sortBody(n.nw, body)
+                        self.add_body_to_tree(n.nw, body)
                         #n.bodies.remove(b)
 
                     elif nodeMidY >= body.ys[-1]:               # body is on the south side
                         #print "SE", n.se.level, "for ", body.name
-                        self.sortBody(n.sw, body)
+                        self.add_body_to_tree(n.sw, body)
                         #n.bodies.remove(b)
 
 
@@ -172,25 +165,25 @@ class tree:
                         if nodeMidY <= b.ys[-1]:                # if body is on the north side:
                             #print "NE Xlims", n.ne.xlims
                             #print "NE", n.ne.level, "for ", b.name
-                            self.sortBody(n.ne, b)
+                            self.add_body_to_tree(n.ne, b)
                             #n.bodies.remove(b)
                         elif nodeMidY >= b.ys[-1]:              # it's on the south
                             #print "SE Xlims", n.se.xlims
                             #print "SE", n.se.level, " for ", b.name
-                            self.sortBody(n.se, b)
+                            self.add_body_to_tree(n.se, b)
                             #n.bodies.remove(b)
                     # BODY IS ON WEST
                     else:                                       # body is on the west side
                         if nodeMidY <= b.ys[-1]:                # if body is on the north side:
                             #print "NW Xlims", n.nw.xlims
                             #print "NW", n.nw.level, "for ", b.name
-                            self.sortBody(n.nw, b)
+                            self.add_body_to_tree(n.nw, b)
                             #n.bodies.remove(b)
 
                         elif nodeMidY >= b.ys[-1]:             # body is on the south side
                             #print "SW Xlims", n.sw.xlims
                             #print "SW", n.sw.level, "for ", b.name
-                            self.sortBody(n.sw, b)
+                            self.add_body_to_tree(n.sw, b)
                             #n.bodies.remove(b)
 
 
@@ -413,7 +406,7 @@ class tree:
 
                 # Sort this body into the new graph
                 b.parent = self.root
-                self.addBod(self.root, b)
+                self.add_body_to_tree(self.root, b)
 
 
 
@@ -422,20 +415,20 @@ class tree:
         startBH = time.time()
         # exampleBody =  body(name, mass, radius, xy, velocity, color)
         mStar = mSol
-        self.addBod(n, body('Star', mStar, rSol, [1, 1], [0,-0], 'y'))
-        self.addBod(n, body('Mercury', 0.055*mEarth, 0.3829*rEarth, [-0.4481*AU, 0], [0, -55410], 'blue'))
-        #self.addBod(n, body('Venus', 0.815*mEarth, 0.949*rEarth, [0.721*AU, 0], [0, 34910], 'orange'))
-        #self.addBod(n, body('Earth', mEarth, rEarth, [0, AU], [-29838, -0], 'g'))
-        #self.addBod(n, body('Mars', 0.10745*mEarth, 0.531*rEarth, [0, -1.52*AU], [24074, 0], 'red'))
-        #self.addBod(n, body('Jupiter', 317*mEarth, 11*rEarth, [5.2*AU, 0], [0, 13048], 'magenta'))
-        #self.addBod(n, body('Saturn', 95.16*mEarth, 9.14*rEarth, [0,10.06*AU], [-10180, 0], 'orange'))
-        #self.addBod(n, body('Uranus', 14.53*mEarth, 3.976*rEarth, [-19.91*AU, 0], [0, -7058], 'blue'))
-        self.addBod(n, body('Neptune', 17.148*mEarth, 3.86*rEarth, [0, -29.95*AU], [5413, 0], 'cyan'))
-        #self.addBod(n, body('HotJupiter', 317*mEarth, 11*rEarth, [0.1*AU, 0], [0, 17315], 'red'))
+        self.add_body_to_tree(n, body('Star', mStar, rSol, [1, 1], [0, -0], 'y'))
+        self.add_body_to_tree(n, body('Mercury', 0.055 * mEarth, 0.3829 * rEarth, [-0.4481 * AU, 0], [0, -55410], 'blue'))
+        #self.add_body_to_tree(n, body('Venus', 0.815*mEarth, 0.949*rEarth, [0.721*AU, 0], [0, 34910], 'orange'))
+        #self.add_body_to_tree(n, body('Earth', mEarth, rEarth, [0, AU], [-29838, -0], 'g'))
+        #self.add_body_to_tree(n, body('Mars', 0.10745*mEarth, 0.531*rEarth, [0, -1.52*AU], [24074, 0], 'red'))
+        #self.add_body_to_tree(n, body('Jupiter', 317*mEarth, 11*rEarth, [5.2*AU, 0], [0, 13048], 'magenta'))
+        #self.add_body_to_tree(n, body('Saturn', 95.16*mEarth, 9.14*rEarth, [0,10.06*AU], [-10180, 0], 'orange'))
+        #self.add_body_to_tree(n, body('Uranus', 14.53*mEarth, 3.976*rEarth, [-19.91*AU, 0], [0, -7058], 'blue'))
+        self.add_body_to_tree(n, body('Neptune', 17.148 * mEarth, 3.86 * rEarth, [0, -29.95 * AU], [5413, 0], 'cyan'))
+        #self.add_body_to_tree(n, body('HotJupiter', 317*mEarth, 11*rEarth, [0.1*AU, 0], [0, 17315], 'red'))
 
         # V2434 Ori
-        #self.addBod(n, body('V2434a', 3.5*mSol, 3.5*rSol, [-220*AU, 0], [0, -np.sqrt((-G*6*mSol)/(220*AU))], 'blue'))
-        #self.addBod(n, body('V2434b', 3.*mSol, 3*rSol, [220*AU, 0], [0, np.sqrt((-G*6*mSol)/(220*AU))], 'cyan'))
+        #self.add_body_to_tree(n, body('V2434a', 3.5*mSol, 3.5*rSol, [-220*AU, 0], [0, -np.sqrt((-G*6*mSol)/(220*AU))], 'blue'))
+        #self.add_body_to_tree(n, body('V2434b', 3.*mSol, 3*rSol, [220*AU, 0], [0, np.sqrt((-G*6*mSol)/(220*AU))], 'cyan'))
         #"""
         # Inner ring of small random bodies:
         if nSmallBods > 0:
@@ -462,7 +455,7 @@ class tree:
                 vx = -v * (y/abs(y)) * np.sin(x/y) + variance
                 vy = v * (x/abs(x)) * np.cos(x/y) + variance
 
-                bh.addBod(n, body('planetesimal_'+str(i), 0.05*mEarth, 0.02*rEarth, [x, y], [vx, vy], 'k'))
+                bh.add_body_to_tree(n, body('planetesimal_' + str(i), 0.05 * mEarth, 0.02 * rEarth, [x, y], [vx, vy], 'k'))
 
 
 
