@@ -34,7 +34,7 @@ class node:
             self.level = self.parent.level + 1
 
 
-class tree:
+class BarnesHutSystem:
     def __init__(self, initialNode):
         self.root = initialNode
 
@@ -85,7 +85,7 @@ class tree:
 
 
     def sortBody(self, n, body):
-        # Sort a body into the tree
+        # Sort a body into the BarnesHutSystem
         # Add body's mass to the total mass of each node it passes through.
         # If the body is trying to go somewhere outside the node, just drop it.
         """ Mechanics
@@ -204,7 +204,7 @@ class tree:
 
 
     def searchTree(self, rootNode, param):
-        # Search the tree for a param using Breadth First Search
+        # Search the BarnesHutSystem for a param using Breadth First Search
         # BFS inspired by pseudo code on Wikipedia (Tree Traversal)
         # Make sure to call the param as a string.
 
@@ -417,7 +417,7 @@ class tree:
 
 
 
-    def run_BarnesHut(self, nTimesteps, nSmallBods):
+    def run(self, nTimesteps, nSmallBods):
         # Start the timer for cost analysis:
         startBH = time.time()
         # exampleBody =  body(name, mass, radius, xy, velocity, color)

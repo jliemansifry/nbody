@@ -2,8 +2,8 @@
 An n-body simulator with implementations for brute-force and Barnes-hut methods. Documentation is basically just the paper for this class (./projectWritings/draft.pdf). Run using the commands:
 
 ```python
-bf.run_BruteForce(nTimesteps, nSmallBodies)
-bh.run_BarnesHut(nTimesteps, nSmallBodies)
+bf.run(nTimesteps, nSmallBodies)
+bh.run(nTimesteps, nSmallBodies)
 ```
 
 ### Notes

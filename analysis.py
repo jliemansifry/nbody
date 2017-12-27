@@ -84,7 +84,7 @@ def makePics(fnames, gifYN):
     # Figure out how many timesteps we'll need
     # This is junky right now bc it assumes that every body has the same number of timesteps
     # This is fucking slow. plotTrajectories is way faster.
-    # The only good time to use this is if run_BarnesHut didn't actually output pictures but you really want a gif.
+    # The only good time to use this is if run didn't actually output pictures but you really want a gif.
     print fnames[0]
     ts = len(pd.read_table(fnames[0], delim_whitespace=True).XS)
     picnames = []
