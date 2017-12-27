@@ -52,12 +52,16 @@ elapsedTimeBH = []
 durationBH = []
 
 
-n = node('root', [-axlims, axlims], [-axlims, axlims], None)
-bh = tree(n)
-bh.visualizeTree()
-bh.run_BarnesHut(30000, 0)
+def main():
+    n = node('root', [-axlims, axlims], [-axlims, axlims], None)
+    bh = tree(n)
+    bh.visualizeTree()
+    bh.run_BarnesHut(30000, 0)
 
-bf = systemBF()
-bf.run_BruteForce(100, 0)
+    bf = systemBF()
+    bf.run_BruteForce(100, 0)
 
-# The End
+    # The End
+
+if __name__ == '__main__':
+    main()
