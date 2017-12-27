@@ -462,6 +462,8 @@ class tree:
                 vx = -v * (y/abs(y)) * np.sin(x/y) + variance
                 vy = v * (x/abs(x)) * np.cos(x/y) + variance
 
+                # this is why this variable is scary. `n` is used here, reliant
+                # on being defined in a galaxy far, far away.
                 bh.addBod(n, body('planetesimal_'+str(i), 0.05*mEarth, 0.02*rEarth, [x, y], [vx, vy], 'k'))
 
 
